@@ -13,6 +13,8 @@
 <h2>ici la liste complète des artistes : </h2>
 
 <?php foreach($artists as $artist): ?>
-	<p><?=  htmlspecialchars($artist['name']) ?> <a href="index.php?controller=artists&action=delete&id=<?= $artist['id'] ?>"> supprimer</a></p>
+	<p><?=  htmlspecialchars($artist['name']) ?>  
+	<a href="index.php?controller=artists&action=edit&id=<?= $artist['id'] ?>">modifier</a> 
+	<a href="index.php?controller=artists&action=delete&id=<?= $artist['id'] ?>">supprimer</a></p>
 <?php endforeach; ?>
 

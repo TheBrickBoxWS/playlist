@@ -10,6 +10,18 @@ function getAllArtists()
     return $artists;
 }
 
+function getArtist($id)
+{
+	$db = dbConnect();
+	
+	$query = $db->prepare("SELECT * FROM artist WHERE id = ?");
+	$result = $query->execute([
+		$id
+	]);
+	
+	return $result;
+}
+
 function add($informations)
 {
 	$db = dbConnect();

@@ -34,6 +34,11 @@ elseif($_GET['action'] == 'add'){
 	}
 }
 elseif($_GET['action'] == 'edit'){
+	
+	//ici aller chercher les infos de l'artiste pour pré-remplissage du formulaire
+	
+	$artist = getArtist($_GET['id']);
+	
 	require('views/artistForm.php');
 }
 elseif($_GET['action'] == 'delete'){
