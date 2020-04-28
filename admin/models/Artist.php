@@ -15,9 +15,29 @@ function getArtist($id)
 	$db = dbConnect();
 	
 	$query = $db->prepare("SELECT * FROM artist WHERE id = ?");
-	$result = $query->execute([
+	$query->execute([
 		$id
 	]);
+	
+	$result = $query->fetch();
+	
+	return $result;
+}
+
+function update($id, $informations)
+{
+	$db = dbConnect();
+	
+	$query = $db->prepare('UPDATE artist SET name = ?, biography = ?, label = ? WHERE id = ?');
+	
+	$result = $query->execute(
+		[
+			$informations['name'],
+			$informations['biography'],
+			$informations['label'],
+			$id,
+		]
+	);
 	
 	return $result;
 }
@@ -26,10 +46,11 @@ function add($informations)
 {
 	$db = dbConnect();
 	
-	$query = $db->prepare("INSERT INTO artist (name, biography) VALUES( :name, :biography)");
+	$query = $db->prepare("INSERT INTO artist (name, biography, label) VALUES( :name, :biography, :label)");
 	$result = $query->execute([
 		'name' => $informations['name'],
 		'biography' => $informations['biography'],
+		'label' => $informations['label'],
 	]);
 
 	if($result){

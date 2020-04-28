@@ -35,11 +35,22 @@ elseif($_GET['action'] == 'add'){
 }
 elseif($_GET['action'] == 'edit'){
 	
-	//ici aller chercher les infos de l'artiste pour pré-remplissage du formulaire
-	
-	$artist = getArtist($_GET['id']);
-	
-	require('views/artistForm.php');
+	if(!empty($_POST)){
+		$result = update($_GET['id'], $_POST);
+		if($result){
+			$_SESSION['messages'][] = 'Artiste mis à jour !';
+		}
+		else{
+			$_SESSION['messages'][] = 'Erreur lors de la mise à jour... :(';
+		}
+		header('Location:index.php?controller=artists&action=list');
+		exit;
+	}
+	else{
+		$artist = getArtist($_GET['id']);
+		require('views/artistForm.php');
+	}
+
 }
 elseif($_GET['action'] == 'delete'){
 	$result = delete(   $_GET['id']    );
